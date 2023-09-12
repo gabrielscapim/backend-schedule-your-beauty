@@ -24,9 +24,9 @@ public class Production {
     @Column(name = "name", length = 45, nullable = false)
     private String name;
 
-    @Column(name = "value", nullable = false)
+    @Column(name = "price", nullable = false)
     @Min(0)
-    private int value;
+    private int price;
 
     @OneToMany
     private Set<Schedule> schedules;
