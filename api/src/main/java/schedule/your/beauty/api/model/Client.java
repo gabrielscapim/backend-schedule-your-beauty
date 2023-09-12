@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Table(name = "clients")
 @Entity(name = "client")
 @Getter
@@ -23,4 +25,7 @@ public class Client {
 
     @Column(name = "number", length = 20, nullable = false)
     private String number;
+
+    @OneToMany
+    private Set<Schedule> schedules;
 }

@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Table(name = "productions")
 @Entity(name = "production")
 @Getter
@@ -25,4 +27,7 @@ public class Production {
     @Column(name = "value", nullable = false)
     @Min(0)
     private int value;
+
+    @OneToMany
+    private Set<Schedule> schedules;
 }

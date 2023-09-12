@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 
 @Table(name = "scheduling_times")
 @Entity(name = "schedule_time")
@@ -28,4 +29,7 @@ public class ScheduleTime {
 
     @Column(name = "available")
     private boolean available;
+
+    @OneToMany
+    private Set<Schedule> schedules;
 }
