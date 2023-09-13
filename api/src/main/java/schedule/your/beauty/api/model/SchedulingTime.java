@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class ScheduleTime {
+public class SchedulingTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

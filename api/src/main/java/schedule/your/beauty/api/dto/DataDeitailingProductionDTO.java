@@ -3,7 +3,7 @@ package schedule.your.beauty.api.dto;
 import schedule.your.beauty.api.model.Production;
 
 public record DataDeitailingProductionDTO(
-        Integer id,
+        int id,
         String name,
         int price
 ) {

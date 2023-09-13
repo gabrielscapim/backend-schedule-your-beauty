@@ -28,7 +28,7 @@ public class Schedule {
 
     @ManyToOne
     @JoinColumn(name = "date_time_id", nullable = false)
-    private ScheduleTime scheduleTime;
+    private SchedulingTime schedulingTime;
 
     @Column(name = "event_type")
     private String eventType;
