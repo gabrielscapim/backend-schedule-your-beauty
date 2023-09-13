@@ -27,7 +27,4 @@ public class Production {
     @Column(name = "price", nullable = false)
     @Min(0)
     private int price;
-
-    @OneToMany
-    private Set<Schedule> schedules;
 }

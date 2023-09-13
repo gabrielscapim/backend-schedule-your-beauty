@@ -5,19 +5,21 @@ import schedule.your.beauty.api.model.Production;
 import schedule.your.beauty.api.model.Schedule;
 import schedule.your.beauty.api.model.SchedulingTime;
 
-public record DataDeitailingScheduleDTO(
+import java.util.List;
+
+public record DataDetailingScheduleDTO(
         int id,
         Client client,
         Production production,
-        SchedulingTime schedulingTime,
+        List<SchedulingTime> schedulingTimes,
         String eventType
 ) {
-    public DataDeitailingScheduleDTO(Schedule schedule) {
+    public DataDetailingScheduleDTO(Schedule schedule) {
         this(
                 schedule.getId(),
                 schedule.getClient(),
                 schedule.getProduction(),
-                schedule.getSchedulingTime(),
+                schedule.getSchedulingTimes(),
                 schedule.getEventType()
         );
     }

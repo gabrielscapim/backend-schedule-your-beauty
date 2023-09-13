@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Table(name = "schedules")
 @Entity(name = "schedule")
 @Getter
@@ -14,22 +16,30 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Schedule {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+  @ManyToOne
+  @JoinColumn(name = "client_id", nullable = false)
+  private Client client;
 
-    @ManyToOne
-    @JoinColumn(name = "production_id", nullable = false)
-    private Production production;
+  @ManyToOne
+  @JoinColumn(name = "production_id", nullable = false)
+  private Production production;
 
-    @ManyToOne
-    @JoinColumn(name = "date_time_id", nullable = false)
-    private SchedulingTime schedulingTime;
+  @ManyToMany(
+    fetch = FetchType.LAZY,
+    cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE })
+  @JoinTable(
+    name = "scheduled_times",
+    joinColumns = { @JoinColumn(name = "schedule_id") },
+    inverseJoinColumns = { @JoinColumn(name = "scheduling_time_id") }
+  )
+  private List<SchedulingTime> schedulingTimes;
 
-    @Column(name = "event_type")
-    private String eventType;
+  @Column(name = "event_type")
+  private String eventType;
 }

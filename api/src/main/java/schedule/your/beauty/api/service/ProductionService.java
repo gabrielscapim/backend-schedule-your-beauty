@@ -2,7 +2,7 @@ package schedule.your.beauty.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import schedule.your.beauty.api.dto.DataDeitailingProductionDTO;
+import schedule.your.beauty.api.dto.DataDetailingProductionDTO;
 import schedule.your.beauty.api.repository.ProductionRepository;
 
 import java.util.ArrayList;
@@ -13,11 +13,11 @@ public class ProductionService {
     @Autowired
     ProductionRepository productionRepository;
 
-    public Iterable<DataDeitailingProductionDTO> getAllProductions() {
+    public Iterable<DataDetailingProductionDTO> getAllProductions() {
         var productionsFromRepository = productionRepository.findAll();
-        ArrayList<DataDeitailingProductionDTO> productions = new ArrayList<>();
+        ArrayList<DataDetailingProductionDTO> productions = new ArrayList<>();
 
-        productionsFromRepository.forEach(production -> productions.add(new DataDeitailingProductionDTO(production)));
+        productionsFromRepository.forEach(production -> productions.add(new DataDetailingProductionDTO(production)));
 
         return productions;
     }

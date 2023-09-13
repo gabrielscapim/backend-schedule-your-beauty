@@ -2,12 +2,12 @@ package schedule.your.beauty.api.dto;
 
 import schedule.your.beauty.api.model.Production;
 
-public record DataDeitailingProductionDTO(
+public record DataDetailingProductionDTO(
         int id,
         String name,
         int price
 ) {
-    public DataDeitailingProductionDTO(Production production) {
+    public DataDetailingProductionDTO(Production production) {
         this(
                 production.getId(),
                 production.getName(),

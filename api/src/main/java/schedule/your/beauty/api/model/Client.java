@@ -25,7 +25,4 @@ public class Client {
 
     @Column(name = "number", length = 20, nullable = false)
     private String number;
-
-    @OneToMany
-    private Set<Schedule> schedules;
 }
