@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import schedule.your.beauty.api.dto.DataDetailingSchedulingTimeDTO;
 import schedule.your.beauty.api.repository.SchedulingTimeRepository;
-
 import java.util.ArrayList;
 
 @Service
@@ -14,10 +13,12 @@ public class SchedulingTimeService {
     private SchedulingTimeRepository schedulingTimeRepository;
 
     public Iterable<DataDetailingSchedulingTimeDTO> getAllSchedulingTimes() {
-        var schedulingTimesFromRepository = schedulingTimeRepository.findAll();
+        var schedulingTimesByDayFromRepository = schedulingTimeRepository.findSchedulingTimes();
         ArrayList<DataDetailingSchedulingTimeDTO> schedulingTimes = new ArrayList<>();
 
-        schedulingTimesFromRepository.forEach(schedulingTime -> schedulingTimes.add(new DataDetailingSchedulingTimeDTO(schedulingTime)));
+        schedulingTimesByDayFromRepository.forEach(schedulingTime -> {
+            schedulingTimes.add(new DataDetailingSchedulingTimeDTO(schedulingTime));
+        });
 
         return schedulingTimes;
     }

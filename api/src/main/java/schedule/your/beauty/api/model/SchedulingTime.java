@@ -1,5 +1,6 @@
 package schedule.your.beauty.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,8 @@ public class SchedulingTime {
 
   @Column(name = "date_time")
   @Temporal(TemporalType.TIMESTAMP)
-  private Timestamp dateTime;
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+  private String dateTime;
 
   @Column(name = "last_schedule_time_day")
   private boolean lastScheduleTimeDay;
