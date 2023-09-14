@@ -1,6 +1,5 @@
 package schedule.your.beauty.api.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,10 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "scheduling_times")
 @Entity(name = "scheduling_time")
@@ -19,15 +15,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class SchedulingTime {
+public class SchedulingDateTime {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
   @Column(name = "date_time")
-  @Temporal(TemporalType.TIMESTAMP)
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
   private String dateTime;
 
   @Column(name = "last_schedule_time_day")

@@ -3,12 +3,12 @@ package schedule.your.beauty.api.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import schedule.your.beauty.api.model.SchedulingTime;
+import schedule.your.beauty.api.model.SchedulingDateTime;
 
 import java.util.List;
 
-public interface SchedulingTimeRepository extends JpaRepository<SchedulingTime, Integer> {
-  @Query(value = "SELECT t1.id, t1.date_time, t1.last_schedule_time_day, available\n" +
+public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDateTime, Integer> {
+  @Query(value = "SELECT DATE_FORMAT(date_time, '%H:%i')\n" +
     "FROM scheduling_times t1\n" +
     "WHERE \n" +
     "    DATE(t1.date_time) = :dateTime\n" +
@@ -35,5 +35,5 @@ public interface SchedulingTimeRepository extends JpaRepository<SchedulingTime, 
     "    )\n" +
     "    AND t1.available = TRUE\n" +
     "    ORDER BY t1.date_time;", nativeQuery = true)
-  List<SchedulingTime> findSchedulingTimes();
+  List<String> findAvailableSchedulingTimesForDay(@Param("dateTime") String dateTime);
 }

@@ -6,9 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "schedules")
 @Entity(name = "schedule")
@@ -40,7 +38,7 @@ public class Schedule {
     joinColumns = { @JoinColumn(name = "schedule_id") },
     inverseJoinColumns = { @JoinColumn(name = "scheduling_time_id") }
   )
-  private List<SchedulingTime> schedulingTimes;
+  private List<SchedulingDateTime> schedulingTimes;
 
   @Column(name = "event_type")
   private String eventType;
