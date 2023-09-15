@@ -14,13 +14,12 @@ public class SchedulingDateTimeService {
 
     public Iterable<String> getAvailableSchedulingTimesByDay(String day, String production) {
         if (Objects.equals(production, "make")) {
-            return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayDayForMake(day);
+            return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayForMake(day);
         }
         if (Objects.equals(production, "make-hair")) {
-            return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayDayForMakeHair(day);
+            return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayForMakeHair(day);
         }
-
-        return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayDayForHair(day);
+        return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayForHair(day);
     }
 
     public Iterable<String> getSchedulingDates() {

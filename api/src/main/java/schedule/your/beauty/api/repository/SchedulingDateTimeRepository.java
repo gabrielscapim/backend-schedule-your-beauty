@@ -30,7 +30,7 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
     "    )\n" +
     "    AND t1.available = TRUE\n" +
     "    ORDER BY t1.date_time;", nativeQuery = true)
-  List<String> findAvailableSchedulingTimesByDayDayForMake(@Param("dateTime") String dateTime);
+  List<String> findAvailableSchedulingTimesByDayForMake(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT DATE_FORMAT(date_time, '%H:%i')\n" +
     "FROM scheduling_times t1\n" +
@@ -59,15 +59,15 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
     "    )\n" +
     "    AND t1.available = TRUE\n" +
     "    ORDER BY t1.date_time;", nativeQuery = true)
-  List<String> findAvailableSchedulingTimesByDayDayForMakeHair(@Param("dateTime") String dateTime);
+  List<String> findAvailableSchedulingTimesByDayForMakeHair(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT DATE_FORMAT(date_time, '%H:%i')\n" +
     "FROM scheduling_times t1\n" +
     "WHERE \n" +
-    "    DATE(t1.date_time) = '2023-09-13'\n" +
+    "    DATE(t1.date_time) = :dateTime\n" +
     "    AND t1.available = TRUE\n" +
     "    ORDER BY t1.date_time;\n", nativeQuery = true)
-  List<String> findAvailableSchedulingTimesByDayDayForHair(@Param("dateTime") String dateTime);
+  List<String> findAvailableSchedulingTimesByDayForHair(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT DISTINCT DATE(date_time)\n" +
     "FROM scheduling_times\n" +
