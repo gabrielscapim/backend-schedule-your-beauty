@@ -68,4 +68,9 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
     "    AND t1.available = TRUE\n" +
     "    ORDER BY t1.date_time;\n", nativeQuery = true)
   List<String> findAvailableSchedulingTimesByDayDayForHair(@Param("dateTime") String dateTime);
+
+  @Query(value = "SELECT DISTINCT DATE(date_time)\n" +
+    "FROM scheduling_times\n" +
+    "ORDER BY DATE(date_time);", nativeQuery = true)
+  List<String> findSchedulingDates();
 }

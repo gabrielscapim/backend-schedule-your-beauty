@@ -22,4 +22,8 @@ public class SchedulingDateTimeService {
 
         return schedulingDateTimeRepository.findAvailableSchedulingTimesByDayDayForHair(day);
     }
+
+    public Iterable<String> getSchedulingDates() {
+        return schedulingDateTimeRepository.findSchedulingDates();
+    }
 }
