@@ -24,10 +24,34 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
     "                FROM scheduling_times t3\n" +
     "                WHERE t3.date_time = t1.date_time + INTERVAL 60 MINUTE\n" +
     "            )\n" +
+    "        )\n" +
+    "        OR\n" +
+    "        t1.last_schedule_time_day = TRUE\n" +
+    "    )\n" +
+    "    AND t1.available = TRUE\n" +
+    "    ORDER BY t1.date_time;", nativeQuery = true)
+  List<String> findAvailableSchedulingTimesByDayDayForMake(@Param("dateTime") String dateTime);
+
+  @Query(value = "SELECT DATE_FORMAT(date_time, '%H:%i')\n" +
+    "FROM scheduling_times t1\n" +
+    "WHERE \n" +
+    "    DATE(t1.date_time) = :dateTime\n" +
+    "    AND (\n" +
+    "        (t1.last_schedule_time_day = FALSE \n" +
+    "            AND EXISTS (\n" +
+    "                SELECT 1\n" +
+    "                FROM scheduling_times t2\n" +
+    "                WHERE t2.date_time = t1.date_time + INTERVAL 30 MINUTE\n" +
+    "            ) \n" +
     "            AND EXISTS (\n" +
     "                SELECT 1\n" +
     "                FROM scheduling_times t3\n" +
-    "                WHERE t3.date_time = t1.date_time + INTERVAL 90 MINUTE\n" +
+    "                WHERE t3.date_time = t1.date_time + INTERVAL 60 MINUTE\n" +
+    "            )\n" +
+    "            AND EXISTS (\n" +
+    "                SELECT 1\n" +
+    "                FROM scheduling_times t4\n" +
+    "                WHERE t4.date_time = t1.date_time + INTERVAL 90 MINUTE\n" +
     "            )\n" +
     "        )\n" +
     "        OR\n" +
@@ -35,5 +59,13 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
     "    )\n" +
     "    AND t1.available = TRUE\n" +
     "    ORDER BY t1.date_time;", nativeQuery = true)
-  List<String> findAvailableSchedulingTimesForDay(@Param("dateTime") String dateTime);
+  List<String> findAvailableSchedulingTimesByDayDayForMakeHair(@Param("dateTime") String dateTime);
+
+  @Query(value = "SELECT DATE_FORMAT(date_time, '%H:%i')\n" +
+    "FROM scheduling_times t1\n" +
+    "WHERE \n" +
+    "    DATE(t1.date_time) = '2023-09-13'\n" +
+    "    AND t1.available = TRUE\n" +
+    "    ORDER BY t1.date_time;\n", nativeQuery = true)
+  List<String> findAvailableSchedulingTimesByDayDayForHair(@Param("dateTime") String dateTime);
 }
