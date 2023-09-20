@@ -98,4 +98,12 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
           "WHERE available = true\n" +
           "ORDER BY DATE(date_time)", nativeQuery = true)
   List<String> findSchedulingDates();
+
+
+  @Query(value = "SELECT \n" +
+          "    id, date_time, last_schedule_time_day, available\n" +
+          "FROM\n" +
+          "    schedule_your_beauty_database.scheduling_times\n" +
+          "WHERE date_time = :dateTime", nativeQuery = true)
+  SchedulingDateTime findDateTime(@Param("dateTime") String dateTime);
 }
