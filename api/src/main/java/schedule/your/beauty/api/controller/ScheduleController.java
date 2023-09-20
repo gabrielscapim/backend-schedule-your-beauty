@@ -1,5 +1,6 @@
 package schedule.your.beauty.api.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public ResponseEntity addSchedule(@RequestBody DataAddScheduleDTO dataAddScheduleDTO, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity addSchedule(@RequestBody @Valid DataAddScheduleDTO dataAddScheduleDTO, UriComponentsBuilder uriComponentsBuilder) {
         var schedule = scheduleService.addSchedule(dataAddScheduleDTO);
 
         var URI = uriComponentsBuilder
