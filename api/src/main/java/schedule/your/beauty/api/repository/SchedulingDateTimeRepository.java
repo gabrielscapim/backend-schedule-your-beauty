@@ -101,31 +101,34 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
 
 
   @Query(value = "SELECT \n" +
-          "    *\n" +
+          "    id, date_time, last_schedule_time_day, available\n" +
           "FROM\n" +
           "    scheduling_times\n" +
           "WHERE\n" +
-          "    date_time = :dateTime\n", nativeQuery = true)
+          "    date_time = :dateTime\n" +
+          "    AND available = true", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForHair(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT \n" +
-          "    *\n" +
+          "    id, date_time, last_schedule_time_day, available\n" +
           "FROM\n" +
           "    scheduling_times\n" +
           "WHERE\n" +
           "    date_time = :dateTime\n" +
-          "        OR date_time =:dateTime + INTERVAL 30 MINUTE\n" +
-          "        OR date_time = :dateTime + INTERVAL 60 MINUTE", nativeQuery = true)
+          "        OR date_time = :dateTime + INTERVAL 30 MINUTE\n" +
+          "        OR date_time = :dateTime + INTERVAL 60 MINUTE" +
+          "    AND available = true", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForMake(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT \n" +
-          "    *\n" +
+          "    id, date_time, last_schedule_time_day, available\n" +
           "FROM\n" +
           "    scheduling_times\n" +
           "WHERE\n" +
           "    date_time = :dateTime\n" +
-          "        OR date_time =:dateTime + INTERVAL 30 MINUTE\n" +
+          "        OR date_time = :dateTime + INTERVAL 30 MINUTE\n" +
           "        OR date_time = :dateTime + INTERVAL 60 MINUTE" +
-          "        OR date_time = :dateTime + INTERVAL 90 MINUTE", nativeQuery = true)
+          "        OR date_time = :dateTime + INTERVAL 90 MINUTE" +
+          "    AND available = true", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForMakeHair(@Param("dateTime") String dateTime);
 }

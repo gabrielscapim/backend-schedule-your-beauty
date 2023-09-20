@@ -2,6 +2,9 @@ package schedule.your.beauty.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import schedule.your.beauty.api.dto.DefaultErrorDTO;
+import schedule.your.beauty.api.exceptions.ApplicationExceptionHandler;
+import schedule.your.beauty.api.exceptions.NotAvailableDateTimeException;
 import schedule.your.beauty.api.model.SchedulingDateTime;
 import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
 
@@ -14,6 +17,9 @@ public class SchedulingDateTimeService {
 
     @Autowired
     private SchedulingDateTimeRepository schedulingDateTimeRepository;
+
+    @Autowired
+    private ApplicationExceptionHandler applicationExceptionHandler;
 
     public Iterable<String> getAvailableSchedulingTimesByDay(String day, String production) {
         if (Objects.equals(production, "make")) {
@@ -42,7 +48,16 @@ public class SchedulingDateTimeService {
             schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForMakeHair(dateTime);
         }
 
-        schedulingDateTimes.forEach(schedulingDateTime -> schedulingDateTime.setAvailable(false));
+        if (schedulingDateTimes.size() == 0) {
+            throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+        }
+
+        for (SchedulingDateTime schedulingDateTime : schedulingDateTimes) {
+            if (!schedulingDateTime.isAvailable()) {
+                throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+            }
+            schedulingDateTime.setAvailable(false);
+        }
 
         return schedulingDateTimes;
     }
