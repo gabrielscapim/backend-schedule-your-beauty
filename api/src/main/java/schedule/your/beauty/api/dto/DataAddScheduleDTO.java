@@ -17,7 +17,7 @@ public record DataAddScheduleDTO(
         String eventName,
 
         @NotBlank(message = "O campo event schedulingDateTimes é obrigatório")
-        List<String> schedulingDateTimes
+        String schedulingDateTime
 //        @NotBlank(message = "O campo event date é obrigatório")
 //        Date eventDate,
 //        @NotBlank(message = "O campo event time é obrigatório")

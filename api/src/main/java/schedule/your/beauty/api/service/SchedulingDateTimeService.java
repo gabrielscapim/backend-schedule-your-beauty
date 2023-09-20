@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import schedule.your.beauty.api.model.SchedulingDateTime;
 import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,10 +29,21 @@ public class SchedulingDateTimeService {
         return schedulingDateTimeRepository.findSchedulingDates();
     }
 
-    public SchedulingDateTime confirmSchedulingDateTime(String dateTime) {
-        SchedulingDateTime schedulingDateTime = schedulingDateTimeRepository.findDateTime(dateTime);
-        schedulingDateTime.setAvailable(false);
+    public List<SchedulingDateTime> confirmSchedulingDateTime(String dateTime, String productionName) {
+        List<SchedulingDateTime> schedulingDateTimes = new ArrayList<>();
 
-        return schedulingDateTime;
+        if (Objects.equals(productionName, "Penteado")) {
+            schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForHair(dateTime);
+        }
+        if (Objects.equals(productionName, "Maquiagem")) {
+            schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForMake(dateTime);
+        }
+        if (Objects.equals(productionName, "Maquiagem e Penteado")) {
+            schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForMakeHair(dateTime);
+        }
+
+        schedulingDateTimes.forEach(schedulingDateTime -> schedulingDateTime.setAvailable(false));
+
+        return schedulingDateTimes;
     }
 }

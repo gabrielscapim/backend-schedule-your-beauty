@@ -42,16 +42,12 @@ public class ScheduleService {
     public Schedule addSchedule(DataAddScheduleDTO dataAddScheduleDTO) {
         Client client = clientRepository.findClientByNumber(dataAddScheduleDTO.clientNumber());
         Production production = productionRepository.findProductionByName(dataAddScheduleDTO.productionName());
-        List<SchedulingDateTime> schedulingDateTimes = new ArrayList<>();
+        List<SchedulingDateTime> schedulingDateTimes = schedulingDateTimeService
+                                                       .confirmSchedulingDateTime(dataAddScheduleDTO.schedulingDateTime(), dataAddScheduleDTO.productionName());
 
         if (client == null) {
             client = clientService.addClient(dataAddScheduleDTO.clientName(), dataAddScheduleDTO.clientNumber());
         }
-
-        dataAddScheduleDTO.schedulingDateTimes().forEach(scheduling -> {
-            SchedulingDateTime schedulingDateTime = schedulingDateTimeService.confirmSchedulingDateTime(scheduling);
-            schedulingDateTimes.add(schedulingDateTime);
-        });
 
         Schedule schedule = new Schedule(
                 client,
