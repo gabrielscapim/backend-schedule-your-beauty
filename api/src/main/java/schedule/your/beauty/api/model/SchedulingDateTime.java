@@ -2,16 +2,14 @@ package schedule.your.beauty.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Table(name = "scheduling_times")
 @Entity(name = "scheduling_time")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -35,7 +33,7 @@ public class SchedulingDateTime {
       CascadeType.PERSIST,
       CascadeType.MERGE
     },
-    mappedBy = "schedulingTimes")
+    mappedBy = "schedulingDateTimes")
   @JsonIgnore
   private List<Schedule> schedules;
 
