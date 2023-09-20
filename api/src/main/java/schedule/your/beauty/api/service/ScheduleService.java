@@ -40,10 +40,10 @@ public class ScheduleService {
     }
 
     public Schedule addSchedule(DataAddScheduleDTO dataAddScheduleDTO) {
+        List<SchedulingDateTime> schedulingDateTimes = schedulingDateTimeService
+          .confirmSchedulingDateTime(dataAddScheduleDTO.schedulingDateTime(), dataAddScheduleDTO.productionName());
         Client client = clientRepository.findClientByNumber(dataAddScheduleDTO.clientNumber());
         Production production = productionRepository.findProductionByName(dataAddScheduleDTO.productionName());
-        List<SchedulingDateTime> schedulingDateTimes = schedulingDateTimeService
-                                                       .confirmSchedulingDateTime(dataAddScheduleDTO.schedulingDateTime(), dataAddScheduleDTO.productionName());
 
         if (client == null) {
             client = clientService.addClient(dataAddScheduleDTO.clientName(), dataAddScheduleDTO.clientNumber());
