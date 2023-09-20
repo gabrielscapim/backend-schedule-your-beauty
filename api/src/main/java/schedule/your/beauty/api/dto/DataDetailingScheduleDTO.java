@@ -11,16 +11,16 @@ public record DataDetailingScheduleDTO(
         int id,
         Client client,
         Production production,
-        List<SchedulingDateTime> schedulingTimes,
-        String eventType
+        List<SchedulingDateTime> schedulingDateTimes,
+        String eventName
 ) {
     public DataDetailingScheduleDTO(Schedule schedule) {
         this(
                 schedule.getId(),
                 schedule.getClient(),
                 schedule.getProduction(),
-                schedule.getSchedulingTimes(),
-                schedule.getEventType()
+                schedule.getSchedulingDateTimes(),
+                schedule.getEventName()
         );
     }
 }
