@@ -3,6 +3,7 @@ package schedule.your.beauty.api.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import schedule.your.beauty.api.dto.DataDetailingClientDTO;
+import schedule.your.beauty.api.model.Client;
 import schedule.your.beauty.api.repository.ClientRepository;
 
 import java.util.ArrayList;
@@ -20,5 +21,13 @@ public class ClientService {
         clientsFromRepository.forEach(client -> clients.add(new DataDetailingClientDTO(client)));
 
         return clients;
+    }
+
+    public Client addClient(String name, String number) {
+        var client = new Client(name, number);
+
+        clientRepository.save(client);
+
+        return client;
     }
 }

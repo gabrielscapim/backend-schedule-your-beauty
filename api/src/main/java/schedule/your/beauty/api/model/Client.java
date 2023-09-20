@@ -25,4 +25,9 @@ public class Client {
 
     @Column(name = "number", length = 20, nullable = false)
     private String number;
+
+    public Client(String name, String number) {
+        this.name = name;
+        this.number = number;
+    }
 }
