@@ -38,8 +38,20 @@ public class Schedule {
     joinColumns = { @JoinColumn(name = "schedule_id") },
     inverseJoinColumns = { @JoinColumn(name = "scheduling_time_id") }
   )
-  private List<SchedulingDateTime> schedulingTimes;
+  private List<SchedulingDateTime> schedulingDateTimes;
 
   @Column(name = "event_type")
-  private String eventType;
+  private String eventName;
+
+  public Schedule(
+          Client client,
+          Production production,
+          List<SchedulingDateTime> schedulingDateTimes,
+          String eventName
+  ) {
+    this.client = client;
+    this.production = production;
+    this.schedulingDateTimes = schedulingDateTimes;
+    this.eventName = eventName;
+  }
 }
