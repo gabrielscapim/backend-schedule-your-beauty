@@ -6,8 +6,8 @@ import lombok.*;
 
 import java.util.List;
 
-@Table(name = "scheduling_times")
-@Entity(name = "scheduling_time")
+@Table(name = "scheduling_date_times")
+@Entity(name = "scheduling_date_time")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -34,9 +34,9 @@ public class Schedule {
       CascadeType.PERSIST,
       CascadeType.MERGE })
   @JoinTable(
-    name = "scheduled_times",
+    name = "scheduled_date_times",
     joinColumns = { @JoinColumn(name = "schedule_id") },
-    inverseJoinColumns = { @JoinColumn(name = "scheduling_time_id") }
+    inverseJoinColumns = { @JoinColumn(name = "scheduling_date_time_id") }
   )
   private List<SchedulingDateTime> schedulingDateTimes;
 
