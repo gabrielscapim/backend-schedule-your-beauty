@@ -18,12 +18,14 @@ public class WebCorsConfig {
   private static final Long MAX_AGE = 3600L;
   private static final int CORS_FILTER_ORDER = -102;
 
+  String allowedOrigin = System.getenv("PROD_DB_WEBSITE_URL");
+
   @Bean
   public FilterRegistrationBean corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
     config.setAllowCredentials(true);
-    config.addAllowedOrigin("http://localhost:5173");
+    config.addAllowedOrigin(allowedOrigin);
     config.setAllowedHeaders(Arrays.asList(
       HttpHeaders.AUTHORIZATION,
       HttpHeaders.CONTENT_TYPE,
