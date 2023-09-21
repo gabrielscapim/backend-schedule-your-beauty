@@ -11,7 +11,7 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
   @Query(value = "SELECT DATE_FORMAT(date_time, '%H:%i')\n" +
     "FROM scheduling_times t1\n" +
     "WHERE \n" +
-    "    DATE(t1.date_time) = '2023-09-19'\n" +
+    "    DATE(t1.date_time) = :dateTime\n" +
     "    AND (\n" +
     "        (t1.last_schedule_time_day = FALSE \n" +
     "            AND EXISTS (\n" +
