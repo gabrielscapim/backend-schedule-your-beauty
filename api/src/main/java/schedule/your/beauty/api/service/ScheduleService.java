@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import schedule.your.beauty.api.dto.DataAddScheduleDTO;
 import schedule.your.beauty.api.dto.DataDetailingScheduleDTO;
+import schedule.your.beauty.api.exceptions.NotAvailableDateTimeException;
+import schedule.your.beauty.api.exceptions.ScheduleNotFoundException;
 import schedule.your.beauty.api.model.Client;
 import schedule.your.beauty.api.model.Production;
 import schedule.your.beauty.api.model.Schedule;
@@ -38,6 +40,24 @@ public class ScheduleService {
         schedulesFromRepository.forEach(schedule -> schedules.add(new DataDetailingScheduleDTO(schedule)));
 
         return schedules;
+    }
+
+    public Schedule getScheduleById(int id) {
+        var schedule = scheduleRepository.getReferenceById(id);
+
+        if (schedule == null) {
+            throw new ScheduleNotFoundException("O agendamento não foi encontrado");
+        }
+
+        return schedule;
+    }
+
+    public void deleteSchedule(int id) {
+        var schedule = this.getScheduleById(id);
+
+        schedule.getSchedulingDateTimes().forEach(schedulingDateTime -> schedulingDateTime.setAvailable(true));
+
+        scheduleRepository.deleteById(id);
     }
 
     public Schedule addSchedule(DataAddScheduleDTO dataAddScheduleDTO) {
