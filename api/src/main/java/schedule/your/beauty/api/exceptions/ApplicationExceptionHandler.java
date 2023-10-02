@@ -44,4 +44,11 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     return new ResponseEntity(validationErrorDTO, HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler(ScheduleNotFoundException.class)
+  public ResponseEntity handleScheduleNotFound() {
+    DefaultErrorDTO defaultError = new DefaultErrorDTO(HttpStatus.BAD_REQUEST.value(), "O agendamento não foi encontrado");
+
+    return new ResponseEntity(defaultError, HttpStatus.BAD_REQUEST);
+  }
 }

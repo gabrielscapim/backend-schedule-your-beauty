@@ -2,6 +2,7 @@ package schedule.your.beauty.api.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -15,9 +16,15 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-    @GetMapping
-    public ResponseEntity getAllSchedules() {
-        return ResponseEntity.ok(scheduleService.getAllSchedules());
+    @GetMapping("/{date}")
+    public ResponseEntity getSchedulesByDay(@PathVariable String date) {
+        return ResponseEntity.ok(scheduleService.getSchedulesByDay(date));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteSchedule(@PathVariable int id) {
+        scheduleService.deleteSchedule(id);
+        return ResponseEntity.status(204).build();
     }
 
     @PostMapping
