@@ -15,9 +15,9 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-    @GetMapping
-    public ResponseEntity getAllSchedules() {
-        return ResponseEntity.ok(scheduleService.getAllSchedules());
+    @GetMapping("/{date}")
+    public ResponseEntity getSchedulesByDay(@PathVariable String date) {
+        return ResponseEntity.ok(scheduleService.getSchedulesByDay(date));
     }
 
     @PostMapping

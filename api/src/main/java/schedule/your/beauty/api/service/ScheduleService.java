@@ -13,6 +13,7 @@ import schedule.your.beauty.api.repository.ProductionRepository;
 import schedule.your.beauty.api.repository.ScheduleRepository;
 import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class ScheduleService {
     @Autowired
     ScheduleRepository scheduleRepository;
 
-    public Iterable<DataDetailingScheduleDTO> getAllSchedules() {
-        var schedulesFromRepository = scheduleRepository.findAll();
+    public Iterable<DataDetailingScheduleDTO> getSchedulesByDay(String date) {
+        var schedulesFromRepository = scheduleRepository.findBySchedulingDateTimes_DateTimeStartingWith(date);
         ArrayList<DataDetailingScheduleDTO> schedules = new ArrayList<>();
 
         schedulesFromRepository.forEach(schedule -> schedules.add(new DataDetailingScheduleDTO(schedule)));
