@@ -131,4 +131,6 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
           "        OR date_time = :dateTime + INTERVAL 90 MINUTE" +
           "    AND available = true", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForMakeHair(@Param("dateTime") String dateTime);
+
+  List<SchedulingDateTime> findByDateTimeStartingWith(String day);
 }

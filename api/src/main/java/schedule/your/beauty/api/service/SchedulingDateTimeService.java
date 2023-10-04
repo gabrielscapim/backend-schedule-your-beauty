@@ -2,12 +2,14 @@ package schedule.your.beauty.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import schedule.your.beauty.api.dto.DataDeitailingSchedulingDateTimeDTO;
 import schedule.your.beauty.api.dto.DefaultErrorDTO;
 import schedule.your.beauty.api.exceptions.ApplicationExceptionHandler;
 import schedule.your.beauty.api.exceptions.NotAvailableDateTimeException;
 import schedule.your.beauty.api.model.SchedulingDateTime;
 import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +22,16 @@ public class SchedulingDateTimeService {
 
     @Autowired
     private ApplicationExceptionHandler applicationExceptionHandler;
+
+    public Iterable<DataDeitailingSchedulingDateTimeDTO> getSchedulingTimesByDay(String day) {
+        var schedulingDateTimesFromRepository = schedulingDateTimeRepository.findByDateTimeStartingWith(day);
+        ArrayList<DataDeitailingSchedulingDateTimeDTO> schedulingDateTimes = new ArrayList<>();
+
+        schedulingDateTimesFromRepository.forEach(schedulingDateTime -> schedulingDateTimes.add(new DataDeitailingSchedulingDateTimeDTO(schedulingDateTime)));
+
+        return schedulingDateTimes;
+    }
+
 
     public Iterable<String> getAvailableSchedulingTimesByDay(String day, String production) {
         if (Objects.equals(production, "make")) {

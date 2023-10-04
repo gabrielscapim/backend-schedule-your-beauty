@@ -12,6 +12,12 @@ public class SchedulingDateTimeController {
     @Autowired
     private SchedulingDateTimeService schedulingDateTimeService;
 
+
+    @GetMapping("/time/{day}")
+    public ResponseEntity getSchedulingTimesByDay(@PathVariable String day) {
+        return ResponseEntity.ok(schedulingDateTimeService.getSchedulingTimesByDay(day));
+    }
+
     @GetMapping("/time/{day}/{production}")
     public ResponseEntity getAvailableSchedulingTimesByDay(@PathVariable String day, @PathVariable String production) {
         return ResponseEntity.ok(schedulingDateTimeService.getAvailableSchedulingTimesByDay(day, production));
