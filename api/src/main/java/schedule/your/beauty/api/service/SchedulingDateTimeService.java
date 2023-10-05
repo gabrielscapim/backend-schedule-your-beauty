@@ -1,7 +1,9 @@
 package schedule.your.beauty.api.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import schedule.your.beauty.api.dto.DataAddSchedulingDateTimeDTO;
 import schedule.your.beauty.api.dto.DataDeitailingSchedulingDateTimeDTO;
 import schedule.your.beauty.api.dto.DefaultErrorDTO;
 import schedule.your.beauty.api.exceptions.ApplicationExceptionHandler;
@@ -72,5 +74,42 @@ public class SchedulingDateTimeService {
         }
 
         return schedulingDateTimes;
+    }
+
+    @Transactional
+    public void addSchedulingDateTimesByDate(
+      DataAddSchedulingDateTimeDTO dataAddSchedulingDateTimeDTO,
+      String date) {
+        var notAvailableLastTimeToSchedule = schedulingDateTimeRepository.findNotAvailableLastTimeToScheduleByDate(date);
+        schedulingDateTimeRepository.deleteAvailableSchedulingDateTimesByDate(date);
+        System.out.println(notAvailableLastTimeToSchedule);
+
+        dataAddSchedulingDateTimeDTO.times().forEach((time) -> {
+            SchedulingDateTime schedulingDateTime = new SchedulingDateTime(
+              date + " " + time + ":00",
+              false,
+              true
+            );
+
+            schedulingDateTimeRepository.save(schedulingDateTime);
+        });
+
+        if (dataAddSchedulingDateTimeDTO.lastTimeToSchedule() != null
+        && notAvailableLastTimeToSchedule == null) {
+            this.addLastSchedulingDateTimeOnDay(dataAddSchedulingDateTimeDTO, date);
+        }
+    }
+
+    public void addLastSchedulingDateTimeOnDay(
+      DataAddSchedulingDateTimeDTO dataAddSchedulingDateTimeDTO,
+      String date
+    ) {
+        SchedulingDateTime schedulingDateTime = new SchedulingDateTime(
+          date + " " + dataAddSchedulingDateTimeDTO.lastTimeToSchedule() + ":00",
+          true,
+          true
+        );
+
+        schedulingDateTimeRepository.save(schedulingDateTime);
     }
 }

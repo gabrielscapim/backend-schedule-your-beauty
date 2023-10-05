@@ -37,4 +37,13 @@ public class SchedulingDateTime {
   @JsonIgnore
   private List<Schedule> schedules;
 
+  public SchedulingDateTime(
+    String dateTime,
+    boolean lastScheduleTimeDay,
+    boolean available
+  ) {
+    this.dateTime = dateTime;
+    this.lastScheduleTimeDay = lastScheduleTimeDay;
+    this.available = available;
+  }
 }

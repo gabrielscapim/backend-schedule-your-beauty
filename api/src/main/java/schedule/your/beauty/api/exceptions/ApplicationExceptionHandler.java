@@ -20,13 +20,13 @@ import java.util.List;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity handleException(Exception exception) {
-
-    DefaultErrorDTO defaultError = new DefaultErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro interno");
-
-    return new ResponseEntity(defaultError, HttpStatus.INTERNAL_SERVER_ERROR);
-  }
+//  @ExceptionHandler(Exception.class)
+//  public ResponseEntity handleException(Exception exception) {
+//
+//    DefaultErrorDTO defaultError = new DefaultErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro interno");
+//
+//    return new ResponseEntity(defaultError, HttpStatus.INTERNAL_SERVER_ERROR);
+//  }
 
   @ExceptionHandler(NotAvailableDateTimeException.class)
   public ResponseEntity handleExceptionNotAvailableDateTime(){
