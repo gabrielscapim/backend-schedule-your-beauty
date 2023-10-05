@@ -1,6 +1,7 @@
 package schedule.your.beauty.api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import schedule.your.beauty.api.model.SchedulingDateTime;
@@ -131,4 +132,18 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
           "        OR date_time = :dateTime + INTERVAL 90 MINUTE" +
           "    AND available = true", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForMakeHair(@Param("dateTime") String dateTime);
+
+  List<SchedulingDateTime> findByDateTimeStartingWith(String day);
+
+  @Query(value = "DELETE FROM scheduling_date_times " +
+    "WHERE date_time LIKE :date% " +
+    "AND available = true", nativeQuery = true)
+  @Modifying // Esta anotação é necessária para indicar que a consulta irá modificar os dados
+  void deleteAvailableSchedulingDateTimesByDate(@Param("date") String date);
+
+  @Query(value = "SELECT id, date_time, last_schedule_time_day, available FROM scheduling_date_times\n" +
+    "WHERE date_time LIKE :date%\n" +
+    "AND last_schedule_time_day = true\n" +
+    "AND available = false", nativeQuery = true)
+  SchedulingDateTime findNotAvailableLastTimeToScheduleByDate(@Param("date") String date);
 }
