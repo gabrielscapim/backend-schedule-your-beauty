@@ -32,6 +32,14 @@ public class ClientRepositoryTests {
     assertThat(foundedClient.getNumber()).isEqualTo(clientNumber);
   }
 
+  @Test
+  @DisplayName("Should not get Client sucessfully from DB")
+  void findClientByNumberFailed() {
+    Client foundedClient = this.clientRepository.findClientByNumber("9");
+
+    assertThat(foundedClient).isEqualTo(null);
+  }
+
   private Client addClient(String name, String number) {
     Client newClient = new Client(name, number);
     this.entityManager.persist(newClient);
