@@ -49,21 +49,56 @@ public class SchedulingDateTimeService {
         return schedulingDateTimeRepository.findSchedulingDates();
     }
 
+    private List<SchedulingDateTime> confirmSchedulingDateTimeForHair(
+      List<SchedulingDateTime> schedulingDateTimes,
+      String dateTime
+      ) {
+        List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForHair(dateTime);
+
+        if (schedulingDateTimesFromRepository.size() != 1) {
+            throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+        }
+
+        return schedulingDateTimesFromRepository;
+    }
+
+    private List<SchedulingDateTime> confirmSchedulingDateTimeForMake(
+      List<SchedulingDateTime> schedulingDateTimes,
+      String dateTime
+    ) {
+        List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForMake(dateTime);
+
+        if (schedulingDateTimesFromRepository.size() != 3) {
+            throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+        }
+
+        return schedulingDateTimesFromRepository;
+    }
+
+    private List<SchedulingDateTime> confirmSchedulingDateTimeForMakeHair(
+      List<SchedulingDateTime> schedulingDateTimes,
+      String dateTime
+    ) {
+        List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForMakeHair(dateTime);
+
+        if (schedulingDateTimesFromRepository.size() != 4) {
+            throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+        }
+
+        return schedulingDateTimesFromRepository;
+    }
+
     public List<SchedulingDateTime> confirmSchedulingDateTime(String dateTime, String productionName) {
         List<SchedulingDateTime> schedulingDateTimes = new ArrayList<>();
 
         if (Objects.equals(productionName, "Penteado")) {
-            schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForHair(dateTime);
+            schedulingDateTimes = this.confirmSchedulingDateTimeForHair(schedulingDateTimes, dateTime);
         }
         if (Objects.equals(productionName, "Maquiagem")) {
-            schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForMake(dateTime);
+            schedulingDateTimes = this.confirmSchedulingDateTimeForMake(schedulingDateTimes, dateTime);
         }
         if (Objects.equals(productionName, "Maquiagem e Penteado")) {
-            schedulingDateTimes = schedulingDateTimeRepository.findDateTimesForMakeHair(dateTime);
-        }
-
-        if (schedulingDateTimes.size() == 0) {
-            throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+            schedulingDateTimes = this.confirmSchedulingDateTimeForMakeHair(schedulingDateTimes, dateTime);
         }
 
         for (SchedulingDateTime schedulingDateTime : schedulingDateTimes) {
