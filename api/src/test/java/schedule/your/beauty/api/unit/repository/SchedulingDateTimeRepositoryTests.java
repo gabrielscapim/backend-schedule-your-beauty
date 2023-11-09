@@ -3,6 +3,7 @@ package schedule.your.beauty.api.unit.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -53,6 +54,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should get a list of available scheduling times for make by day sucessfully from DB")
   void findAvailableSchedulingTimesByDayForMakeSucess() {
     this.addArrayOfSchedulingDateTimes(dateTimes);
     List<String> foundedSchedulingDateTimes = this
@@ -65,6 +67,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should get a list of available scheduling times for hair by day sucessfully from DB")
   void findAvailableSchedulingTimesByDayForHairSucess() {
     this.addArrayOfSchedulingDateTimes(dateTimes);
     List<String> foundedSchedulingDateTimes = this
@@ -77,6 +80,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should get a list of available scheduling times for make by day sucessfully from DB")
   void findAvailableSchedulingTimesByDayForMakeHairSucess() {
     this.addArrayOfSchedulingDateTimes(dateTimes);
     List<String> foundedSchedulingDateTimes = this
@@ -89,6 +93,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should get a list of date times for hair by day sucessfully from DB")
   void findDateTimesForHairSucess() {
     this.addArrayOfSchedulingDateTimes(dateTimes);
     List<SchedulingDateTime> foundedSchedulingDateTimes = this
@@ -101,6 +106,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should get a list of date times for make by day sucessfully from DB")
   void findDateTimesForMakeSucess() {
     this.addArrayOfSchedulingDateTimes(dateTimes);
     List<SchedulingDateTime> foundedSchedulingDateTimes = this
@@ -117,6 +123,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should not get a list of date times for make by day sucessfully from DB")
   void findDateTimesForMakeFailed() {
     this.addArrayOfSchedulingDateTimes(dateTimes);
     List<SchedulingDateTime> foundedSchedulingDateTimes = this
@@ -127,6 +134,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should delete an available scheduling date time sucessfully from DB")
   void deleteAvailableSchedulingDateTimesByDateSucess() {
     this.addSchedulingDateTime("2023-10-01 11:00:00", false, true);
     SchedulingDateTime schedulingDateTimeFromRepository = this
@@ -147,6 +155,7 @@ public class SchedulingDateTimeRepositoryTests {
 
   @Test
   @Transactional
+  @DisplayName("Should get a not available last time to schedule sucessfully from DB")
   void findNotAvailableLastTimeToScheduleByDateSucess() {
     this.addSchedulingDateTime("2023-10-01 11:00:00", true, false);
     SchedulingDateTime schedulingDateTimeFromRepository = this

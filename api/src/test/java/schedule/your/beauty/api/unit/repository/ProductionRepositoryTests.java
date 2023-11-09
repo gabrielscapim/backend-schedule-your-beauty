@@ -2,6 +2,7 @@ package schedule.your.beauty.api.unit.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +22,7 @@ public class ProductionRepositoryTests {
   EntityManager entityManager;
 
   @Test
+  @DisplayName("Should get Production sucessfully from DB")
   void findProductionByNameSucess() {
     this.addProduction();
     Production foundedProduction = this.productionRepository.findProductionByName("Penteado");
@@ -29,6 +31,7 @@ public class ProductionRepositoryTests {
   }
 
   @Test
+  @DisplayName("Should not get Production sucessfully from DB")
   void findProductionByNameFail() {
     Production foundedProduction = this.productionRepository.findProductionByName("Penteado");
 
