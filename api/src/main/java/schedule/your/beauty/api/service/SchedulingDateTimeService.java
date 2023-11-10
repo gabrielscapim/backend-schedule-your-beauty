@@ -49,10 +49,7 @@ public class SchedulingDateTimeService {
         return schedulingDateTimeRepository.findSchedulingDates();
     }
 
-    private List<SchedulingDateTime> confirmSchedulingDateTimeForHair(
-      List<SchedulingDateTime> schedulingDateTimes,
-      String dateTime
-      ) {
+    public List<SchedulingDateTime> confirmSchedulingDateTimeForHair(String dateTime) {
         List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForHair(dateTime);
 
         if (schedulingDateTimesFromRepository.size() != 1) {
@@ -62,10 +59,7 @@ public class SchedulingDateTimeService {
         return schedulingDateTimesFromRepository;
     }
 
-    private List<SchedulingDateTime> confirmSchedulingDateTimeForMake(
-      List<SchedulingDateTime> schedulingDateTimes,
-      String dateTime
-    ) {
+    public List<SchedulingDateTime> confirmSchedulingDateTimeForMake(String dateTime) {
         List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForMake(dateTime);
 
         if (schedulingDateTimesFromRepository.size() != 3) {
@@ -75,10 +69,7 @@ public class SchedulingDateTimeService {
         return schedulingDateTimesFromRepository;
     }
 
-    private List<SchedulingDateTime> confirmSchedulingDateTimeForMakeHair(
-      List<SchedulingDateTime> schedulingDateTimes,
-      String dateTime
-    ) {
+    public List<SchedulingDateTime> confirmSchedulingDateTimeForMakeHair(String dateTime) {
         List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForMakeHair(dateTime);
 
         if (schedulingDateTimesFromRepository.size() != 4) {
@@ -92,13 +83,13 @@ public class SchedulingDateTimeService {
         List<SchedulingDateTime> schedulingDateTimes = new ArrayList<>();
 
         if (Objects.equals(productionName, "Penteado")) {
-            schedulingDateTimes = this.confirmSchedulingDateTimeForHair(schedulingDateTimes, dateTime);
+            schedulingDateTimes = this.confirmSchedulingDateTimeForHair(dateTime);
         }
         if (Objects.equals(productionName, "Maquiagem")) {
-            schedulingDateTimes = this.confirmSchedulingDateTimeForMake(schedulingDateTimes, dateTime);
+            schedulingDateTimes = this.confirmSchedulingDateTimeForMake(dateTime);
         }
         if (Objects.equals(productionName, "Maquiagem e Penteado")) {
-            schedulingDateTimes = this.confirmSchedulingDateTimeForMakeHair(schedulingDateTimes, dateTime);
+            schedulingDateTimes = this.confirmSchedulingDateTimeForMakeHair(dateTime);
         }
 
         for (SchedulingDateTime schedulingDateTime : schedulingDateTimes) {
@@ -117,7 +108,6 @@ public class SchedulingDateTimeService {
       String date) {
         var notAvailableLastTimeToSchedule = schedulingDateTimeRepository.findNotAvailableLastTimeToScheduleByDate(date);
         schedulingDateTimeRepository.deleteAvailableSchedulingDateTimesByDate(date);
-        System.out.println(notAvailableLastTimeToSchedule);
 
         dataAddSchedulingDateTimeDTO.times().forEach((time) -> {
             SchedulingDateTime schedulingDateTime = new SchedulingDateTime(
