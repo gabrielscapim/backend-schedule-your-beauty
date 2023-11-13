@@ -55,4 +55,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

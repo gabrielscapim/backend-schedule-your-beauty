@@ -25,10 +25,7 @@ import schedule.your.beauty.api.model.SchedulingDateTime;
 import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
 import schedule.your.beauty.api.service.SchedulingDateTimeService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -50,7 +47,7 @@ public class SchedulingDateTimeServiceTests {
   }
 
   @Autowired
-  @InjectMocks
+  @Spy
   private SchedulingDateTimeService schedulingDateTimeService;
 
   @Mock
