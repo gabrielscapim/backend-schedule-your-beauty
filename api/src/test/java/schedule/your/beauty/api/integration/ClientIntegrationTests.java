@@ -27,7 +27,7 @@ import java.util.Map;
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc(addFilters = false)
-@Sql(scripts = {"/sql/create_clients_db.sql", "/sql/create_users_db.sql"})
+@Sql(scripts = "/sql/create_clients_db.sql")
 public class ClientIntegrationTests {
 
     @Container

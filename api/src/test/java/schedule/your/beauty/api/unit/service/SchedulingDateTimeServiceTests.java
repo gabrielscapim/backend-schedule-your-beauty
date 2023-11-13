@@ -1,7 +1,5 @@
 package schedule.your.beauty.api.unit.service;
 
-import jakarta.transaction.Transactional;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,30 +7,24 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import schedule.your.beauty.api.dto.DataAddSchedulingDateTimeDTO;
 import schedule.your.beauty.api.exceptions.NotAvailableDateTimeException;
-import schedule.your.beauty.api.exceptions.ScheduleNotFoundException;
 import schedule.your.beauty.api.model.SchedulingDateTime;
 import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
 import schedule.your.beauty.api.service.SchedulingDateTimeService;
 
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @Testcontainers
-@Sql(scripts = "/create_scheduling_date_times_db.sql")
+@Sql(scripts = "/sql/create_scheduling_date_times_db.sql")
 public class SchedulingDateTimeServiceTests {
 
   @Container
