@@ -106,8 +106,7 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
           "FROM\n" +
           "    scheduling_date_times\n" +
           "WHERE\n" +
-          "    date_time = :dateTime\n" +
-          "    AND available = true", nativeQuery = true)
+          "    date_time = :dateTime\n", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForHair(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT \n" +
@@ -117,8 +116,7 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
           "WHERE\n" +
           "    date_time = :dateTime\n" +
           "        OR date_time = :dateTime + INTERVAL 30 MINUTE\n" +
-          "        OR date_time = :dateTime + INTERVAL 60 MINUTE" +
-          "    AND available = true", nativeQuery = true)
+          "        OR date_time = :dateTime + INTERVAL 60 MINUTE", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForMake(@Param("dateTime") String dateTime);
 
   @Query(value = "SELECT \n" +
@@ -129,8 +127,7 @@ public interface SchedulingDateTimeRepository extends JpaRepository<SchedulingDa
           "    date_time = :dateTime\n" +
           "        OR date_time = :dateTime + INTERVAL 30 MINUTE\n" +
           "        OR date_time = :dateTime + INTERVAL 60 MINUTE" +
-          "        OR date_time = :dateTime + INTERVAL 90 MINUTE" +
-          "    AND available = true", nativeQuery = true)
+          "        OR date_time = :dateTime + INTERVAL 90 MINUTE", nativeQuery = true)
   List<SchedulingDateTime> findDateTimesForMakeHair(@Param("dateTime") String dateTime);
 
   List<SchedulingDateTime> findByDateTimeStartingWith(String day);

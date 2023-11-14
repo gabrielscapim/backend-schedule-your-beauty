@@ -27,4 +27,9 @@ public class Production {
     @Column(name = "price", nullable = false)
     @Min(0)
     private int price;
+
+    public Production(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
 }

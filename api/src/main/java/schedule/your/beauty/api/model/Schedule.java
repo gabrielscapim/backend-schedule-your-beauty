@@ -31,7 +31,6 @@ public class Schedule {
   @ManyToMany(
     fetch = FetchType.LAZY,
     cascade = {
-      CascadeType.PERSIST,
       CascadeType.MERGE })
   @JoinTable(
     name = "scheduled_date_times",

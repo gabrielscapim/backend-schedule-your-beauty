@@ -33,7 +33,7 @@ public class ScheduleService {
     @Autowired
     ScheduleRepository scheduleRepository;
 
-    public Iterable<DataDetailingScheduleDTO> getSchedulesByDay(String date) {
+    public List<DataDetailingScheduleDTO> getSchedulesByDay(String date) {
         var schedulesFromRepository = scheduleRepository.findBySchedulingDateTimes_DateTimeStartingWith(date);
         ArrayList<DataDetailingScheduleDTO> schedules = new ArrayList<>();
 
