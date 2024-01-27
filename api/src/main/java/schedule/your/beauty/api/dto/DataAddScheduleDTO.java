@@ -3,7 +3,6 @@ package schedule.your.beauty.api.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.Length;
 
 public record DataAddScheduleDTO(
         @NotBlank(message = "O campo clientName é obrigatório")

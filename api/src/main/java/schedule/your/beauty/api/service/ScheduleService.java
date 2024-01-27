@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import schedule.your.beauty.api.dto.DataAddScheduleDTO;
 import schedule.your.beauty.api.dto.DataDetailingScheduleDTO;
-import schedule.your.beauty.api.exceptions.NotAvailableDateTimeException;
 import schedule.your.beauty.api.exceptions.ScheduleNotFoundException;
 import schedule.your.beauty.api.model.Client;
 import schedule.your.beauty.api.model.Production;
@@ -13,9 +12,6 @@ import schedule.your.beauty.api.model.SchedulingDateTime;
 import schedule.your.beauty.api.repository.ClientRepository;
 import schedule.your.beauty.api.repository.ProductionRepository;
 import schedule.your.beauty.api.repository.ScheduleRepository;
-import schedule.your.beauty.api.repository.SchedulingDateTimeRepository;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

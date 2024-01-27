@@ -21,7 +21,6 @@ import schedule.your.beauty.api.service.UserService;
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
-    private final UserService userService;
     private final TokenService tokenService;
 
     @Autowired
@@ -31,7 +30,6 @@ public class AuthenticationController {
             TokenService tokenService
     ) {
         this.authenticationManager = authenticationManager;
-        this.userService = userService;
         this.tokenService = tokenService;
     }
 
