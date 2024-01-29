@@ -21,6 +21,10 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String password;
 
+    public void setPassword(String password) {
+        this.password = password;
+      }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -60,4 +64,6 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
     }
+
+    public User() {}
 }
