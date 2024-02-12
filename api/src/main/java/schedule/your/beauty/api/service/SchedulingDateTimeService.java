@@ -86,12 +86,12 @@ public class SchedulingDateTimeService {
             schedulingDateTimes = this.confirmSchedulingDateTimeForMakeHair(dateTime);
         }
 
-        for (SchedulingDateTime schedulingDateTime : schedulingDateTimes) {
-            if (!schedulingDateTime.isAvailable()) {
-                throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
-            }
-            schedulingDateTime.setAvailable(false);
-        }
+        // for (SchedulingDateTime schedulingDateTime : schedulingDateTimes) {
+        //     if (!schedulingDateTime.isAvailable()) {
+        //         throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+        //     }
+        //     schedulingDateTime.setAvailable(false);
+        // }
 
         return schedulingDateTimes;
     }
