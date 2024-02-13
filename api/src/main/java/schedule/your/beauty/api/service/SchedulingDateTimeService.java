@@ -43,6 +43,24 @@ public class SchedulingDateTimeService {
         return schedulingDateTimeRepository.findSchedulingDates();
     }
 
+    public List<SchedulingDateTime> confirmSchedulingDateTimeForHair(String dateTime) {
+        List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForHair(dateTime);
+
+        return schedulingDateTimesFromRepository;
+    }
+
+    public List<SchedulingDateTime> confirmSchedulingDateTimeForMake(String dateTime) {
+        List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForMake(dateTime);
+
+        return schedulingDateTimesFromRepository;
+    }
+
+    public List<SchedulingDateTime> confirmSchedulingDateTimeForMakeHair(String dateTime) {
+        List<SchedulingDateTime> schedulingDateTimesFromRepository = schedulingDateTimeRepository.findDateTimesForMakeHair(dateTime);
+
+        return schedulingDateTimesFromRepository;
+    }
+
     public List<SchedulingDateTime> confirmSchedulingDateTime(String dateTime, String productionName) {
         List<SchedulingDateTime> schedulingDateTimes = new ArrayList<>();
 
@@ -57,9 +75,9 @@ public class SchedulingDateTimeService {
         }
 
         for (SchedulingDateTime schedulingDateTime : schedulingDateTimes) {
-            if (!schedulingDateTime.isAvailable()) {
-                throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
-            }
+            // if (!schedulingDateTime.isAvailable()) {
+            //     throw new NotAvailableDateTimeException("A data de agendamento deve estar disponível");
+            // }
             schedulingDateTime.setAvailable(false);
         }
 
